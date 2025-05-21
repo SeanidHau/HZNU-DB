@@ -34,4 +34,34 @@ public class ManagerDao {
 
         return null;
     }
+
+    public boolean updatePassword(String managerId, String oldPwd, String newPwd) {
+        String sqlCheck = "SELECT * FROM manager WHERE manager_id = ? AND password = ?";
+        String sqlUpdate = "UPADTE manager SET password = ? WHERE manager_id = ?";
+
+        try (Connection conn = DBUtil.getConnection();
+             PreparedStatement checkStmt = conn.prepareStatement(sqlCheck)) {
+
+            //验证旧密码
+            checkStmt.setString(1, managerId);
+            checkStmt.setString(2, oldPwd);
+
+            try (ResultSet rs = checkStmt.executeQuery()) {
+                if (rs.next()) {
+                    //验证通过
+                    try (PreparedStatement updateStmt = conn.prepareStatement(sqlUpdate)) {
+                        updateStmt.setString(1, newPwd);
+                        updateStmt.setString(2, managerId);
+                        int result = updateStmt.executeUpdate();
+                        return result > 0;
+                    }
+                }
+            }
+        } catch (Exception e) {
+            System.out.println("密码修改失败！");
+            e.printStackTrace();
+        }
+
+        return false;
+    }
 }

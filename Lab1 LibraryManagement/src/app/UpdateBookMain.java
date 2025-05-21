@@ -4,15 +4,16 @@ import dao.BookDao;
 import model.Book;
 
 import java.util.Scanner;
-public class AddBookMain {
+
+public class UpdateBookMain {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         BookDao bookDao = new BookDao();
 
-        System.out.print("=== 图书管理系统 - 添加图书 ===");
+        System.out.println("=== 图书管理系统 - 修改图书信息 ===");
 
-        System.out.print("请输入书号（book_number）：");
-        String bookNumber = scanner.nextLine();
+        System.out.print("请输入要修改的书号（book_numebr）：");
+        String bookNUmber = scanner.nextLine();
 
         System.out.print("请输入类别（category）：");
         String category = scanner.nextLine();
@@ -35,13 +36,13 @@ public class AddBookMain {
         System.out.print("请输入库存（inventory）：");
         int inventory = Integer.parseInt(scanner.nextLine());
 
-        Book book = new Book(bookNumber, category, bookName, publisher, author, price, bookTotal, inventory);
+        Book book = new Book(bookNUmber, category, bookName, publisher, author, price, bookTotal, inventory);
 
-        boolean success = bookDao.addBook(book);
+        boolean success = bookDao.updateBook(book);
         if (success) {
-            System.out.println("图书添加成功！");
+            System.out.println("图书信息更新成功！");
         } else {
-            System.out.println("图书添加失败！");
+            System.out.println("图书信息更新失败！");
         }
     }
 }
