@@ -14,7 +14,7 @@ public class DeleteBookMain {
         System.out.print("请输入要删除的书号（book_number)：");
         String bookNumber = scanner.nextLine();
 
-        boolean success = bookDao.deleteBookByBookNumber(bookNumber);
+        boolean success = bookDao.deleteBookByNumber(bookNumber);
         if (success) {
             System.out.println("图书删除成功！");
         } else {

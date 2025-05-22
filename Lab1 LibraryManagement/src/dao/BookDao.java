@@ -37,7 +37,7 @@ public class BookDao {
         return false;
     }
 
-    public boolean deleteBookByBookNumber(String bookNumber) {
+    public boolean deleteBookByNumber(String bookNumber) {
         String sql = "DELETE FROM book WHERE book_number = ?";
 
         try (Connection conn = DBUtil.getConnection();
