@@ -23,7 +23,7 @@ public class BorrowDao {
                 countStmt.setString(1, bookNumber);
                 ResultSet rs = countStmt.executeQuery();
                 if (rs.next() && rs.getInt(1) >= 15) {
-                    System.out.println("借书失败，已接满15本！");
+                    System.out.println("借书失败，已借满15本！");
                     return false;
                 }
             }

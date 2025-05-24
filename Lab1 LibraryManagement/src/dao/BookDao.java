@@ -11,7 +11,7 @@ import java.util.List;
 
 public class BookDao {
     public boolean addBook(Book book) {
-        String sql = "INSERT INTO book (book_number, category, book_name, publisher, author, price, book_total, telephone) " +
+        String sql = "INSERT INTO book (book_number, category, book_name, publisher, author, price, book_total, inventory) " +
                      "VALUES(?, ?, ?, ?, ?, ?, ?, ?)";
 
         try (Connection conn = DBUtil.getConnection();

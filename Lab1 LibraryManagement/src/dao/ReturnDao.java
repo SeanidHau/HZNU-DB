@@ -13,7 +13,7 @@ public class ReturnDao {
         String checkSql = "SELECT * FROM borrow_book WHERE reader_number = ? AND book_number = ?";
         String insertSql = "INSERT INTO return_book (reader_number, book_number, return_time) VALUES (?, ?, NOW())";
         //String deleteSql = "DELETE FROM borrow_book WHERE reader_number = ? AND book_number = ?";
-        String updateSql = "UPDATE book SET inventory = inventory + 1 AND book_number = ?";
+        String updateSql = "UPDATE book SET inventory = inventory + 1 WHERE book_number = ?";
 
         try (Connection conn = DBUtil.getConnection()) {
             try (PreparedStatement checkStmt = conn.prepareStatement(checkSql)) {
@@ -24,6 +24,7 @@ public class ReturnDao {
 
                 if (!rs.next()) {
                     System.out.println("还书失败，该读者未借阅此书！");
+                    return false;
                 }
             }
 
@@ -39,6 +40,8 @@ public class ReturnDao {
                 updateStmt.setString(1, bookNumber);
                 updateStmt.executeUpdate();
             }
+
+            return true;
 
         } catch (Exception e) {
             System.out.println("还书失败！");

@@ -31,15 +31,15 @@ public class ReaderDao {
             System.out.println("手机号格式错误");
         }
 
-        String sql = "INSERT INTO reader(reader_number, name, department, gender, telephone)" +
-                     "VALUES(?, ?, ?, ?, ?, ?）";
+        String sql = "INSERT INTO reader(reader_number, name, department, gender, telephone) " +
+                     "VALUES(?, ?, ?, ?, ?)";
 
         try (Connection conn = DBUtil.getConnection();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
             pstmt.setString(1, reader.getReaderNumber());
             pstmt.setString(2, reader.getName());
-            pstmt.setString(33, reader.getDepartment());
+            pstmt.setString(3, reader.getDepartment());
             pstmt.setString(4, reader.getGender());
             pstmt.setString(5, reader.getTelephone());
 
